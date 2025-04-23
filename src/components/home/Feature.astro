@@ -1,0 +1,11 @@
+---
+const { data } = Astro.props;
+const { title, description, icon } = data;
+console.log(title, description, icon);
+---
+
+<div>
+  <h1>{title}</h1>
+  <p>{description}</p>
+  <img src={icon} alt={title} />
+</div>

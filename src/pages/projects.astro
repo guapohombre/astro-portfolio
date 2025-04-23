@@ -1,0 +1,18 @@
+---
+//components
+import ProjectCard from "@/components/ProjectCard.astro";
+import Heading from "@/components/ui/Heading.astro";
+
+//layout
+import Layout from "@/layouts/Layout.astro";
+
+//components
+import ProjectWrapper from "@/components/home/Projects.astro";
+---
+
+<Layout title="My Recent Projects">
+  <div class="container rows">
+    <Heading tagName="h1" tagSize="h1">Latest Projects</Heading>
+    <ProjectWrapper tagName="h2" />
+  </div>
+</Layout>

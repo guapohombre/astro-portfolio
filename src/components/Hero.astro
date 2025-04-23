@@ -1,0 +1,55 @@
+---
+import katie from "@/assets/avatar.jpeg";
+
+//components
+import Heading from "./ui/Heading.astro";
+import Link from "./ui/Link.astro";
+
+// type Links = {
+//   href: string;
+//   name: string;
+//   variant: "primary" | "secondary" | "ghost" | "icon";
+// };
+
+const defaultContent = {
+  title: "Hi, I'm Katie",
+  description: "I'm a self-taught designer and developer obsessed with quality",
+  links: [
+    { href: "katie-haus-cv.pdf", name: "Download CV", variant: "secondary" },
+    { href: "#connect", name: "Let's Connect", variant: "primary" },
+  ],
+};
+
+// type Content = {
+//   title?: string;
+//   description?: string;
+//   links: {
+//     href: string;
+//     name: string;
+//     variant: "primary" | "secondary" | "ghost" | "icon";
+//   }[];
+// }
+
+const {
+  title = defaultContent.title,
+  description = defaultContent.description,
+  links = defaultContent.links,
+} = Astro.props;
+---
+
+<section aria-label="Hero Section" class="hero">
+  <img src={katie.src} alt="Katie Haus" />
+
+  <Heading tagName="h1" tagSize="h1">{title}</Heading>
+
+  <p>{description}</p>
+  <div class="columns">
+    {
+      links.map((l: any) => (
+        <Link href={l.href} variant={l.variant}>
+          {l.name}
+        </Link>
+      ))
+    }
+  </div>
+</section>

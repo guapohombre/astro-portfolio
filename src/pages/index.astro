@@ -1,0 +1,48 @@
+---
+//components
+import Features from "@/components/home/Features.astro";
+import Hero from "@/components/Hero.astro";
+import Connect from "@/components/home/Connect.astro";
+//layout
+import Layout from "@/layouts/Layout.astro";
+import Projects from "@/components/home/Projects.astro";
+import Heading from "@/components/ui/Heading.astro";
+import BlogCard from "@/components/blog/BlogCard.astro";
+import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => {
+  return !data.isDraft;
+});
+---
+
+<Layout>
+  <Hero />
+  <Features />
+  <section aria-label="recent-projects" class="container rows">
+    <Heading tagName="h2" tagSize="h2" id="recent-projects"
+      >Recent Projects</Heading
+    >
+    <Projects limit={3} tagName="h3" />
+  </section>
+  <Connect />
+  <section aria-label="recent-posts" class="container rows">
+    <Heading tagName="h2" tagSize="h2" id="recent-posts"
+      >Latest Blog Posts</Heading
+    >
+    <div class="grid-wrapper">
+      {
+        posts
+          .sort(
+            (a, b) =>
+              new Date(b.data.pubDate).getTime() -
+              new Date(a.data.pubDate).getTime()
+          )
+          .slice(0, 3)
+          .map((p) => <BlogCard post={p} tagName="h3" />)
+      }
+    </div>
+  </section>
+</Layout>
+
+<style></style>
